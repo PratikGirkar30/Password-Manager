@@ -26,7 +26,7 @@ Built with modern React for smooth UX
 
 React (v19)
 Axios
-CSS / Tailwind (if used)
+CSS 
 
 **Backend:**
 
