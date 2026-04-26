@@ -37,7 +37,7 @@ Express.js
 
 MongoDB (Mongoose)
 
-Authentication & Security:
+**Authentication & Security:**
 
 JSON Web Tokens (JWT)
 bcrypt.js
