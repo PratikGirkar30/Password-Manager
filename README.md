@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SecurePass - MERN Password Manager
 
 SecurePass is a full-stack password management application built with the MERN stack (MongoDB, Express, React, Node.js). It provides a secure way for users to store, manage, and retrieve their passwords for various websites.
@@ -154,4 +153,4 @@ MongoDB (Mongoose)
 
 JSON Web Tokens (JWT)
 bcrypt.js
->>>>>>> 0f5ee58a0be13c4c1895489984710bececc08594
+
