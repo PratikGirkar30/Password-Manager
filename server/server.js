@@ -5,6 +5,7 @@ const cors = require('cors');
 
 const authRoutes = require('./routes/auth');
 const passwordRoutes = require('./routes/passwords');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +23,7 @@ mongoose.connect(MONGO_URI)
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/passwords', passwordRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.get('/', (req, res) => {
   res.send('Password Manager API is running');

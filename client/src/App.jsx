@@ -4,17 +4,36 @@ import { Shield } from 'lucide-react';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import AdminDashboard from './pages/AdminDashboard';
 import './index.css';
 
 // Simple PrivateRoute component
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/login" />;
+  const role = localStorage.getItem('role');
+  
+  if (!token) return <Navigate to="/login" />;
+  if (role === 'admin') return <Navigate to="/admin-dashboard" />;
+  
+  return children;
+};
+
+// Admin Route component
+const AdminRoute = ({ children }) => {
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
+  
+  if (!token) return <Navigate to="/login" />;
+  if (role !== 'admin') return <Navigate to="/dashboard" />;
+  
+  return children;
 };
 
 function App() {
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('name');
     window.location.href = '/login';
   };
 
@@ -45,6 +64,14 @@ function App() {
               <PrivateRoute>
                 <Dashboard />
               </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/admin-dashboard" 
+            element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
             } 
           />
         </Routes>

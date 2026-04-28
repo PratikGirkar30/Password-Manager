@@ -33,7 +33,14 @@ const Login = () => {
       });
 
       localStorage.setItem('token', res.data.token);
-      navigate('/dashboard');
+      localStorage.setItem('name', res.data.user.name);
+      localStorage.setItem('role', res.data.user.role || 'user');
+      
+      if (res.data.user.role === 'admin') {
+        navigate('/admin-dashboard');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid credentials');
     } finally {

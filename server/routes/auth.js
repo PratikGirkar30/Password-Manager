@@ -10,10 +10,10 @@ const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_for_mini_project';
 // @desc    Register a user
 router.post('/register', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     // Simple validation
-    if (!email || !password) {
+    if (!name || !email || !password) {
       return res.status(400).json({ message: 'Please enter all fields' });
     }
 
@@ -29,6 +29,7 @@ router.post('/register', async (req, res) => {
 
     // Create new user
     const newUser = new User({
+      name,
       email,
       password: hashedPassword
     });
@@ -42,7 +43,9 @@ router.post('/register', async (req, res) => {
       token,
       user: {
         id: savedUser._id,
-        email: savedUser.email
+        name: savedUser.name,
+        email: savedUser.email,
+        role: savedUser.role
       }
     });
   } catch (err) {
@@ -81,7 +84,9 @@ router.post('/login', async (req, res) => {
       token,
       user: {
         id: user._id,
-        email: user.email
+        name: user.name,
+        email: user.email,
+        role: user.role
       }
     });
   } catch (err) {

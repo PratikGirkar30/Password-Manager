@@ -5,6 +5,7 @@ import { ShieldAlert } from 'lucide-react';
 
 const Register = () => {
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: ''
   });
@@ -12,13 +13,13 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { email, password } = formData;
+  const { name, email, password } = formData;
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
     e.preventDefault();
-    if (!email || !password) {
+    if (!name || !email || !password) {
       return setError('Please fill in all fields');
     }
 
@@ -28,11 +29,14 @@ const Register = () => {
     try {
       const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
       const res = await axios.post(`${API_URL}/auth/register`, {
+        name,
         email,
         password
       });
 
       localStorage.setItem('token', res.data.token);
+      localStorage.setItem('name', res.data.user.name);
+      localStorage.setItem('role', res.data.user.role || 'user');
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
@@ -55,6 +59,18 @@ const Register = () => {
         )}
 
         <form onSubmit={onSubmit}>
+          <div className="form-group">
+            <label htmlFor="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={name}
+              onChange={onChange}
+              className="form-control"
+              placeholder="John Doe"
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
             <input
