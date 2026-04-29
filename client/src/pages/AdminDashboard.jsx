@@ -94,7 +94,7 @@ const AdminDashboard = () => {
 
       {error && <div className="error-message">{error}</div>}
 
-      <div className="card" style={{ marginTop: '2rem', padding: '0', overflow: 'hidden',maxWidth:none }}>
+      <div className="card" style={{ marginTop: '2rem', padding: '0', overflow: 'hidden',maxWidth:'none' }}>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
